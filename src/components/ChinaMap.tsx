@@ -8,7 +8,10 @@ type ChinaMapProps = {
   onSelectProvince: (name: string) => void;
 };
 
-const mapUrl = 'https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json';
+const mapUrls = [
+  `${import.meta.env.BASE_URL}maps/china.json`,
+  'https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json'
+];
 const chinaCenter: [number, number] = [104.2, 35.8];
 
 export function ChinaMap({ selectedProvince, isProvinceFocused, onSelectProvince }: ChinaMapProps) {
@@ -22,11 +25,25 @@ export function ChinaMap({ selectedProvince, isProvinceFocused, onSelectProvince
 
     async function loadMap() {
       try {
-        const response = await fetch(mapUrl);
-        if (!response.ok) {
-          throw new Error(`map fetch failed: ${response.status}`);
+        let geoJson: Parameters<typeof echarts.registerMap>[1] | null = null;
+
+        for (const mapUrl of mapUrls) {
+          try {
+            const response = await fetch(mapUrl);
+            if (!response.ok) {
+              throw new Error(`map fetch failed: ${response.status}`);
+            }
+            geoJson = (await response.json()) as Parameters<typeof echarts.registerMap>[1];
+            break;
+          } catch {
+            geoJson = null;
+          }
         }
-        const geoJson = await response.json();
+
+        if (!geoJson) {
+          throw new Error('map fetch failed');
+        }
+
         if (!cancelled) {
           echarts.registerMap('china', geoJson);
           setMapReady(true);

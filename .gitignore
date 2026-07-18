@@ -4,7 +4,10 @@ dist/
 coverage/
 .vite/
 .playwright-cli/
+.sheet-work/
 output/
+outputs/
+public/food-images/
 *.tsbuildinfo
 dev-server.log
 vite.config.js

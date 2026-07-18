@@ -55,8 +55,6 @@ button {
 }
 
 .kicker,
-.film-heading p,
-.province-panel p,
 .food-modal p {
   margin: 0;
   color: #d6c690;
@@ -147,11 +145,6 @@ button {
   font-size: 15px;
 }
 
-.province-panel p {
-  margin-top: 9px;
-  line-height: 1.6;
-}
-
 .province-shortcuts {
   display: flex;
   flex-wrap: wrap;
@@ -183,7 +176,7 @@ button {
 .film-heading {
   display: flex;
   align-items: end;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 16px;
   max-width: 1180px;
   margin: 0 auto 10px;
@@ -242,6 +235,34 @@ button {
   pointer-events: none;
 }
 
+.food-image-missing,
+.modal-image-missing {
+  display: grid;
+  place-items: center;
+  color: #d6c690;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(245, 236, 217, 0.08) 0,
+      rgba(245, 236, 217, 0.08) 8px,
+      rgba(245, 236, 217, 0.03) 8px,
+      rgba(245, 236, 217, 0.03) 16px
+    ),
+    #20261f;
+}
+
+.food-image-missing {
+  height: 148px;
+}
+
+.food-image-missing span,
+.modal-image-missing span {
+  border: 1px solid rgba(214, 198, 144, 0.38);
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.22);
+}
+
 .food-card span {
   padding: 13px 14px 0;
   color: #d6c690;
@@ -278,11 +299,34 @@ button {
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.48);
 }
 
-.food-modal img {
+.modal-image-panel {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.modal-image-link {
+  display: block;
+  min-height: 280px;
+  color: inherit;
+}
+
+.modal-image-panel img {
   width: 100%;
   height: 100%;
   min-height: 280px;
   object-fit: cover;
+  border-radius: 6px;
+}
+
+.modal-image-panel figcaption {
+  color: #d6c690;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.modal-image-missing {
+  min-height: 280px;
   border-radius: 6px;
 }
 
@@ -296,6 +340,14 @@ button {
   display: block;
   color: #eee0bf;
   line-height: 1.9;
+}
+
+.source-link {
+  display: inline-flex;
+  margin-top: 18px;
+  color: #f0c66a;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
 }
 
 .close-button {
@@ -339,7 +391,8 @@ button {
     grid-template-columns: 1fr;
   }
 
-  .food-modal img {
+  .modal-image-link,
+  .modal-image-panel img {
     height: 260px;
     min-height: 0;
   }

@@ -42,11 +42,35 @@ export function FoodModal({ food, onClose }: FoodModalProps) {
         <button className="close-button" type="button" aria-label="关闭详情" onClick={onClose}>
           ×
         </button>
-        <img src={food.image} alt={food.name} />
+        <figure className="modal-image-panel">
+          {food.hasImage ? (
+            <a
+              className="modal-image-link"
+              href={food.imageSourceUrl || food.image}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="查看图片来源"
+            >
+              <img src={food.image} alt={food.imageAlt} />
+            </a>
+          ) : (
+            <div className="modal-image-missing" aria-label={`${food.name}图片待补`}>
+              <span>图片待补</span>
+            </div>
+          )}
+          <figcaption>
+            {food.hasImage ? `图片信息：${food.imageSourceName}` : '图片信息：待补充'}
+          </figcaption>
+        </figure>
         <div>
-          <p>{food.city}</p>
+          <p>
+            {food.province} · {food.city} · {food.category}
+          </p>
           <h2 id="food-modal-title">{food.name}</h2>
           <span>{food.description}</span>
+          <a className="source-link" href={food.sourceUrl} target="_blank" rel="noreferrer">
+            来源：{food.sourceName}
+          </a>
         </div>
       </article>
     </div>

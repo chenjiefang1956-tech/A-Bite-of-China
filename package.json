@@ -6,15 +6,16 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
+    "optimize:images": "node scripts/optimize-food-images.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
     "echarts": "^6.0.0",
-    "vite": "^7.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "vite": "^7.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
@@ -22,6 +23,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "jsdom": "^26.1.0",
+    "sharp": "^0.35.3",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4"
   }

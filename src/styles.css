@@ -1,0 +1,346 @@
+:root {
+  color: #f5ecd9;
+  background: #101310;
+  font-family:
+    Inter, "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(91, 39, 32, 0.38), transparent 34%),
+    radial-gradient(circle at 74% 42%, rgba(226, 183, 97, 0.16), transparent 28%),
+    linear-gradient(180deg, #171b16 0%, #0f1210 66%, #090a09 100%);
+}
+
+.topbar {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px clamp(18px, 4vw, 54px);
+  pointer-events: none;
+}
+
+.topbar > * {
+  pointer-events: auto;
+}
+
+.kicker,
+.film-heading p,
+.province-panel p,
+.food-modal p {
+  margin: 0;
+  color: #d6c690;
+  font-size: 13px;
+}
+
+.topbar h1 {
+  margin: 3px 0 0;
+  font-size: clamp(26px, 4vw, 54px);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.ghost-button {
+  min-height: 40px;
+  border: 1px solid rgba(245, 236, 217, 0.42);
+  border-radius: 8px;
+  color: #f5ecd9;
+  background: rgba(16, 19, 16, 0.5);
+  padding: 0 14px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.ghost-button:focus-visible,
+.food-card:focus-visible,
+.close-button:focus-visible {
+  outline: 3px solid #f0c66a;
+  outline-offset: 3px;
+}
+
+.hero-map {
+  position: relative;
+  min-height: 74vh;
+  padding-top: 86px;
+}
+
+.map-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.map-canvas {
+  width: 100%;
+  height: 100%;
+  filter: saturate(1.05) contrast(1.06);
+}
+
+.map-status {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #f5ecd9;
+  background: rgba(0, 0, 0, 0.58);
+  border: 1px solid rgba(245, 236, 217, 0.28);
+  border-radius: 8px;
+  padding: 14px 18px;
+}
+
+.map-error {
+  color: #ffd4c8;
+}
+
+.province-panel {
+  position: absolute;
+  z-index: 22;
+  left: clamp(18px, 4vw, 54px);
+  bottom: 42px;
+  width: min(320px, calc(100vw - 36px));
+  padding: 16px 18px;
+  border-left: 3px solid #d35a38;
+  background: linear-gradient(90deg, rgba(9, 10, 9, 0.78), rgba(9, 10, 9, 0.24));
+  backdrop-filter: blur(8px);
+}
+
+.province-panel span {
+  display: block;
+  font-size: clamp(28px, 5vw, 64px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.province-panel strong {
+  display: block;
+  margin-top: 8px;
+  color: #f0c66a;
+  font-size: 15px;
+}
+
+.province-panel p {
+  margin-top: 9px;
+  line-height: 1.6;
+}
+
+.province-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.province-shortcuts button {
+  border: 1px solid rgba(245, 236, 217, 0.26);
+  border-radius: 999px;
+  color: #f5ecd9;
+  background: rgba(245, 236, 217, 0.08);
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.province-shortcuts button[aria-pressed="true"] {
+  color: #171b16;
+  background: #f0c66a;
+}
+
+.film-stage {
+  position: relative;
+  z-index: 15;
+  margin-top: -70px;
+  padding: 0 0 34px;
+}
+
+.film-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1180px;
+  margin: 0 auto 10px;
+  padding: 0 clamp(18px, 4vw, 54px);
+}
+
+.film-heading h2 {
+  margin: 0;
+  font-size: clamp(20px, 3vw, 32px);
+}
+
+.film-strip {
+  cursor: grab;
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  padding: 14px 0 22px;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.86), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.86)),
+    linear-gradient(180deg, rgba(245, 236, 217, 0.09), rgba(245, 236, 217, 0.03));
+  border-top: 8px dotted rgba(245, 236, 217, 0.34);
+  border-bottom: 8px dotted rgba(245, 236, 217, 0.34);
+}
+
+.film-strip:active {
+  cursor: grabbing;
+}
+
+.film-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  padding: 0 clamp(18px, 4vw, 54px);
+  will-change: transform;
+}
+
+.food-card {
+  display: grid;
+  grid-template-rows: 148px auto auto;
+  width: clamp(210px, 24vw, 286px);
+  min-height: 238px;
+  text-align: left;
+  color: #f5ecd9;
+  border: 1px solid rgba(245, 236, 217, 0.22);
+  border-radius: 8px;
+  padding: 0;
+  overflow: hidden;
+  background: #171a16;
+  cursor: pointer;
+}
+
+.food-card img {
+  width: 100%;
+  height: 148px;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.food-card span {
+  padding: 13px 14px 0;
+  color: #d6c690;
+  font-size: 13px;
+}
+
+.food-card strong {
+  padding: 4px 14px 14px;
+  font-size: 22px;
+}
+
+.modal-backdrop {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.food-modal {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.85fr) minmax(260px, 1fr);
+  gap: 22px;
+  width: min(860px, 100%);
+  max-height: min(680px, 92vh);
+  overflow: auto;
+  border: 1px solid rgba(245, 236, 217, 0.26);
+  border-radius: 8px;
+  background: #181b17;
+  padding: 18px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.48);
+}
+
+.food-modal img {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.food-modal h2 {
+  margin: 8px 0 14px;
+  font-size: clamp(28px, 5vw, 54px);
+  line-height: 1.05;
+}
+
+.food-modal span {
+  display: block;
+  color: #eee0bf;
+  line-height: 1.9;
+}
+
+.close-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(245, 236, 217, 0.34);
+  border-radius: 50%;
+  color: #f5ecd9;
+  background: rgba(0, 0, 0, 0.42);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .topbar {
+    align-items: flex-start;
+    padding-top: 16px;
+  }
+
+  .hero-map {
+    min-height: 70vh;
+  }
+
+  .province-panel {
+    bottom: 88px;
+  }
+
+  .film-stage {
+    margin-top: -56px;
+  }
+
+  .food-card {
+    width: 232px;
+  }
+
+  .food-modal {
+    grid-template-columns: 1fr;
+  }
+
+  .food-modal img {
+    height: 260px;
+    min-height: 0;
+  }
+}

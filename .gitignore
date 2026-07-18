@@ -1,0 +1,12 @@
+.superpowers/
+node_modules/
+dist/
+coverage/
+.vite/
+.playwright-cli/
+output/
+*.tsbuildinfo
+dev-server.log
+vite.config.js
+vite.config.d.ts
+npm-debug.log*

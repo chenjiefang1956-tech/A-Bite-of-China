@@ -1,8 +1,0 @@
-dist
-node_modules
-.sheet-work
-output
-outputs
-public/food-images
-*.tsbuildinfo
-dev-server.log
